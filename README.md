@@ -9,7 +9,9 @@
 
 Get the mime type of a stream by inspecting its header. The stream is being consumed, but a new readable stream is returned together with the mime type.
 
-Supports both [Node.js ReadableStream](https://nodejs.org/api/stream.html) and [Streams API ReadableStream](https://developer.mozilla.org/docs/Web/API/Streams_API).
+Supports both [Node.js ReadableStream](https://nodejs.org/api/stream.html) (of Buffers, not *object-mode*) and [Streams API ReadableStream](https://developer.mozilla.org/docs/Web/API/Streams_API) of [typed arrays](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) (such as e.g. [Uint8Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)), [ArrayBuffers](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) or [DataViews](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView).
+
+The first couple of kilobytes are necessary to deduce the filetype. After that, the returned promise is resolved with a new stream (from the beginning of the input stream) and the mime type.
 
 It also supports buffers (of type `Uint8Array`, such as [Node.js Buffers](https://nodejs.org/api/buffer.html)) and file descriptors instead of streams.
 
@@ -25,7 +27,7 @@ interface ReturnType {
 }
 ```
 
-To aid finding the mime-type if it is unclear given the *content* of the stream (or buffer or file), a filename can be provided, in which case a mime-type can be deduced as a fallback:
+To aid finding the mime-type if it is unclear given the *content* of the stream (or buffer or file descriptor), a filename can be provided, in which case a mime-type can be deduced as a fallback.
 
 
 ## API
@@ -65,7 +67,7 @@ console.log(mime); // 'image/png'
 
 ```ts
 import { openSync } from 'fs'
-import { getMimeTypeOfFd } from 'stream-mime-type'
+import { getMimeType } from 'stream-mime-type'
 
 const fd = openSync("file.png", "r");
 const { mime } = await getMimeType( fd, { filename: "file.png" } );
