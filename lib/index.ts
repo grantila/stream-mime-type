@@ -24,18 +24,21 @@ export type GetMimeTypeOptions =
 export interface GetMimeTypeResultStrict
 {
 	mime: string | undefined;
+	stream: undefined;
 }
 export interface GetMimeTypeResult
 {
 	mime: string;
+	stream: undefined;
 }
 export interface GetMimeTypeResultStrictWithStream
-	extends GetMimeTypeResultStrict
 {
+	mime: string | undefined;
 	stream: NodeJS.ReadableStream;
 }
-export interface GetMimeTypeResultWithStream extends GetMimeTypeResult
+export interface GetMimeTypeResultWithStream
 {
+	mime: string;
 	stream: NodeJS.ReadableStream;
 }
 
@@ -94,13 +97,12 @@ export async function getMimeType(
 	options?: GetMimeTypeOptions
 )
 : Promise<
-	typeof options extends GetMimeTypeOptionsNoStrict
-		? typeof data extends NodeJS.ReadableStream
-			? GetMimeTypeResultWithStream
-			: GetMimeTypeResult
-		: typeof data extends NodeJS.ReadableStream
-			? GetMimeTypeResultStrictWithStream
-			: GetMimeTypeResultStrict
+	Partial<
+		| GetMimeTypeResultStrictWithStream
+		| GetMimeTypeResultWithStream
+		| GetMimeTypeResultStrict
+		| GetMimeTypeResult
+	>
 >
 {
 	const _options = options as GetMimeTypeOptionsNoStrict;
