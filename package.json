@@ -1,0 +1,62 @@
+{
+  "name": "stream-mime-type",
+  "version": "0.0.0-development",
+  "description": "Get the mime type of a stream",
+  "author": "Gustaf Räntilä",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grantila/stream-mime-type/issues"
+  },
+  "homepage": "https://github.com/grantila/stream-mime-type#readme",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "directories": {},
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.prod.json",
+    "test": "jest",
+    "cz": "git-cz"
+  },
+  "pre-commit": [
+    "build",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grantila/stream-mime-type"
+  },
+  "keywords": [
+    "stream",
+    "mime",
+    "content",
+    "type",
+    "mime-type",
+    "content-type"
+  ],
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/mime-types": "^2.1.0",
+    "cz-conventional-changelog": "^3.1.0",
+    "jest": "^26.4.2",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^3.0.1",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "file-type": "^16.0.1",
+    "mime-types": "^2.1.27",
+    "stream-head": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
