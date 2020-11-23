@@ -147,7 +147,7 @@ async function getMimeTypeOfFd(
 
 	const { bytesRead } =
 		await fsRead( fd, buffer, 0, fileTypeBufferLength, 0 );
-
+//console.log("SS", bytesRead)
 	if ( !bytesRead )
 		return mimeFromFilename( options?.filename ) ??
 			( options?.strict ? undefined : octetStream );

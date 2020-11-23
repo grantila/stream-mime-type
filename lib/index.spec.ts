@@ -35,19 +35,34 @@ describe( "typescript as fd", ( ) =>
 		expect( mime ).toBe( "video/mp2t" );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( thisFd, { strict: false } );
 		expect( mime ).toBe( 'application/octet-stream' );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( thisFd, {
 			strict: false,
 			filename: 'file.ts'
 		} );
 		expect( mime ).toBe( 'video/mp2t' );
+	} );
+
+	it( "strict, unknown filename", async ( ) =>
+	{
+		const { mime } = await getMimeType( thisFd, {
+			strict: true,
+			filename: 'file.unknown-extension'
+		} );
+		expect( mime ).toBeUndefined( );
+	} );
+
+	it( "no options", async ( ) =>
+	{
+		const { mime } = await getMimeType( thisFd );
+		expect( mime ).toBe( 'application/octet-stream' );
 	} );
 } );
 
@@ -68,13 +83,13 @@ describe( "png as fd", ( ) =>
 		expect( mime ).toBe( "image/png" );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( pngFd, { strict: false } );
 		expect( mime ).toBe( 'image/png' );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( pngFd, {
 			strict: false,
@@ -101,19 +116,43 @@ describe( "empty png as fd", ( ) =>
 		expect( mime ).toBe( "image/png" );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( emptyPngFd, { strict: false } );
 		expect( mime ).toBe( 'application/octet-stream' );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( emptyPngFd, {
 			strict: false,
 			filename: 'file.png'
 		} );
 		expect( mime ).toBe( 'image/png' );
+	} );
+
+	it( "strict, unknown filename", async ( ) =>
+	{
+		const { mime } = await getMimeType( emptyPngFd, {
+			strict: true,
+			filename: 'file.unknown-extension'
+		} );
+		expect( mime ).toBeUndefined( );
+	} );
+
+	it( "no strict, unknown filename", async ( ) =>
+	{
+		const { mime } = await getMimeType( emptyPngFd, {
+			strict: false,
+			filename: 'file.unknown-extension'
+		} );
+		expect( mime ).toBe( 'application/octet-stream' );
+	} );
+
+	it( "no options", async ( ) =>
+	{
+		const { mime } = await getMimeType( emptyPngFd );
+		expect( mime ).toBe( 'application/octet-stream' );
 	} );
 } );
 
@@ -134,13 +173,13 @@ describe( "typescript as buffer", ( ) =>
 		expect( mime ).toBe( "video/mp2t" );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( thisBuffer, { strict: false } );
 		expect( mime ).toBe( 'application/octet-stream' );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( thisBuffer, {
 			strict: false,
@@ -167,13 +206,13 @@ describe( "png as buffer", ( ) =>
 		expect( mime ).toBe( "image/png" );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( pngBuffer, { strict: false } );
 		expect( mime ).toBe( 'image/png' );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime } = await getMimeType( pngBuffer, {
 			strict: false,
@@ -204,7 +243,7 @@ describe( "typescript as stream", ( ) =>
 		expect( await getStreamAsBuffer( stream ) ).toEqual( thisBuffer );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime, stream } =
 			await getMimeType( thisStream( ), { strict: false } );
@@ -212,7 +251,7 @@ describe( "typescript as stream", ( ) =>
 		expect( await getStreamAsBuffer( stream ) ).toEqual( thisBuffer );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime, stream } =
 			await getMimeType( thisStream( ), {
@@ -245,7 +284,7 @@ describe( "png as stream", ( ) =>
 		expect( await getStreamAsBuffer( stream ) ).toEqual( pngBuffer );
 	} );
 
-	it( "strict, no filename", async ( ) =>
+	it( "no strict, no filename", async ( ) =>
 	{
 		const { mime, stream } =
 			await getMimeType( pngStream( ), { strict: false } );
@@ -253,7 +292,7 @@ describe( "png as stream", ( ) =>
 		expect( await getStreamAsBuffer( stream ) ).toEqual( pngBuffer );
 	} );
 
-	it( "strict, filename", async ( ) =>
+	it( "no strict, filename", async ( ) =>
 	{
 		const { mime, stream } =
 			await getMimeType( pngStream( ), {
