@@ -15,6 +15,12 @@ The first couple of kilobytes are necessary to deduce the filetype. After that, 
 It also supports buffers (of type `Uint8Array`, such as [Node.js Buffers](https://nodejs.org/api/buffer.html)) and file descriptors instead of streams.
 
 
+## Versions
+
+From v2:
+ * This package is a pure ESM, no CommonJS support
+
+
 # Usage
 
 `getMimeType` takes either a number (file descriptor), a buffer (`Uint8Array`) or a readable stream as first argument. The returned promise contains the mime type and a new readable stream (if the input was a stream) for further streaming, on the form:

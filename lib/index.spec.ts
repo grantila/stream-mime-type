@@ -2,9 +2,13 @@ import { getMimeType } from './index'
 
 import { openSync, readFileSync, createReadStream } from 'fs'
 import * as path from 'path'
+import { fileURLToPath } from 'url'
 
 import { buffer as getStreamAsBuffer } from 'get-stream'
 
+
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = path.dirname( __filename );
 
 const thisFile = __filename;
 const pngFile = path.join( __dirname, '..', 'fixtures', '1x1.png' );

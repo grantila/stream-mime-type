@@ -2,7 +2,7 @@ import { read } from 'fs'
 import { parse as parsePath } from 'path'
 import { promisify } from 'util'
 
-import * as fileType from 'file-type'
+import { fileTypeFromBuffer } from 'file-type'
 import { lookup as mimeLookup } from 'mime-types'
 import streamHead from 'stream-head'
 
@@ -68,7 +68,7 @@ async function getMimeTypeOfBuffer(
 )
 : Promise< string | undefined >
 {
-	const fileTypeData = await fileType.fromBuffer( data );
+	const fileTypeData = await fileTypeFromBuffer( data );
 
 	if ( fileTypeData )
 		return fileTypeData.mime;
