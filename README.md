@@ -2,7 +2,6 @@
 [![downloads][downloads-image]][npm-url]
 [![build status][build-image]][build-url]
 [![coverage status][coverage-image]][coverage-url]
-[![Language grade: JavaScript][lgtm-image]][lgtm-url]
 
 
 # stream-mime-type
@@ -96,9 +95,7 @@ The `strict` can be set to `true` (defaults to `false`) in which case the result
 [npm-image]: https://img.shields.io/npm/v/stream-mime-type.svg
 [npm-url]: https://npmjs.org/package/stream-mime-type
 [downloads-image]: https://img.shields.io/npm/dm/stream-mime-type.svg
-[build-image]: https://img.shields.io/github/workflow/status/grantila/stream-mime-type/Master.svg
+[build-image]: https://img.shields.io/github/actions/workflow/status/grantila/stream-mime-type/master.yml?branch=master
 [build-url]: https://github.com/grantila/stream-mime-type/actions?query=workflow%3AMaster
 [coverage-image]: https://coveralls.io/repos/github/grantila/stream-mime-type/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/grantila/stream-mime-type?branch=master
-[lgtm-image]: https://img.shields.io/lgtm/grade/javascript/g/grantila/stream-mime-type.svg?logo=lgtm&logoWidth=18
-[lgtm-url]: https://lgtm.com/projects/g/grantila/stream-mime-type/context:javascript
